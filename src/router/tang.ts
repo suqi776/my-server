@@ -1,3 +1,4 @@
+import type { Request, Response } from 'express'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -41,8 +42,8 @@ const authors = Array.from(authorSet).sort()
 
 // 获取所有标签
 // GET /api/tags
-router.get('/tags', (req, res) => {
-  res.json({
+router.get('/tags', (req: Request, res: Response) => {
+  return res.json({
     total: allTags.length,
     tags: allTags,
   })
@@ -50,8 +51,8 @@ router.get('/tags', (req, res) => {
 
 // 获取所有作者
 // GET /api/authors
-router.get('/authors', (req, res) => {
-  res.json({
+router.get('/authors', (req: Request, res: Response) => {
+  return res.json({
     total: authors.length,
     authors,
   })
@@ -59,10 +60,10 @@ router.get('/authors', (req, res) => {
 
 // 根据作者获取诗
 // GET /api/poems/author/:author
-router.get('/poems/author/:author', (req, res) => {
+router.get('/poems/author/:author', (req: Request, res: Response) => {
   const { author } = req.params
   const filteredPoems = poems.filter(poem => poem.author === author)
-  res.json({
+  return res.json({
     total: filteredPoems.length,
     poems: filteredPoems,
   })
@@ -70,12 +71,12 @@ router.get('/poems/author/:author', (req, res) => {
 
 // 根据标签获取诗
 // GET /api/poems/tag/:tag
-router.get('/poems/tag/:tag', (req, res) => {
+router.get('/poems/tag/:tag', (req: Request, res: Response) => {
   const { tag } = req.params
   const filteredPoems = poems.filter(poem =>
     Array.isArray(poem.tags) && poem.tags.includes(tag),
   )
-  res.json({
+  return res.json({
     total: filteredPoems.length,
     poems: filteredPoems,
   })
@@ -83,10 +84,10 @@ router.get('/poems/tag/:tag', (req, res) => {
 
 // 根据标题获取诗
 // GET /api/poems/title/:title
-router.get('/poems/title/:title', (req, res) => {
+router.get('/poems/title/:title', (req: Request, res: Response) => {
   const { title } = req.params
   const filteredPoems = poems.filter(poem => poem.title === title)
-  res.json({
+  return res.json({
     total: filteredPoems.length,
     poems: filteredPoems,
   })
@@ -94,7 +95,7 @@ router.get('/poems/title/:title', (req, res) => {
 
 // 随机获取一首诗
 // GET /api/poems/random
-router.get('/poems/random', (req, res) => {
+router.get('/poems/random', (req: Request, res: Response) => {
   if (!Array.isArray(poems) || poems.length === 0) {
     return res.status(500).json({ error: '诗词数据未加载或为空' })
   }
@@ -102,13 +103,13 @@ router.get('/poems/random', (req, res) => {
   const randomIndex = Math.floor(Math.random() * poems.length)
   const randomPoem = poems[randomIndex]
 
-  res.json(randomPoem)
+  return res.json(randomPoem)
 })
 
 // 获取所有诗
 // GET /api/poems
-router.get('/poems', (req, res) => {
-  res.json({
+router.get('/poems', (req: Request, res: Response) => {
+  return res.json({
     total: poems.length,
     poems,
   })
