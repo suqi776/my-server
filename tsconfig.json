@@ -3,7 +3,9 @@
     "target": "ES2020",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true, // ✅ 允许写 .ts 后缀
     "strict": true,
+    "noEmit": true, // ✅ 不输出 .js，仅类型检查
     "outDir": "dist",
     "esModuleInterop": true,
     "skipLibCheck": true
