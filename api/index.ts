@@ -10,3 +10,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.error(`Example app listening on port ${port}`)
 })
+
+export default app
