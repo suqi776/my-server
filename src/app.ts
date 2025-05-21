@@ -7,7 +7,7 @@ import express from 'express'
 const app = express()
 const port = 3000
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response<string>) => {
   return res.send('Hello World12211!')
 })
 
