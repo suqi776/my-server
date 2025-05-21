@@ -1,7 +1,7 @@
 import express from 'express'
 
-import tang from './router/tang'
-import test from './router/test'
+import tang from './router/tang.ts'
+import test from './router/test.ts'
 
 const app = express()
 const port = 3000

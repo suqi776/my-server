@@ -5,13 +5,21 @@ import { Router } from 'express'
 
 const router = Router()
 
+// 诗词类型
+interface Poem {
+  title: string
+  author: string
+  content: string
+  tags: string[]
+}
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // 读取 JSON 数据（可放入项目根目录或 data 目录）
 const dataPath = path.resolve(__dirname, '../db/tang.json')
 const raw = fs.readFileSync(dataPath, 'utf-8')
-const poems = JSON.parse(raw)
+const poems = JSON.parse(raw) as Poem[]
 
 // 提取所有唯一标签
 const tagSet = new Set<string>()

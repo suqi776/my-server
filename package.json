@@ -10,7 +10,9 @@
     "start": "tsx api/index.ts",
     "dev": "tsx watch api/index.ts",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "dependencies": {
     "axios": "^1.9.0",
@@ -20,6 +22,8 @@
     "@antfu/eslint-config": "^3.12.0",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^9.17.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
