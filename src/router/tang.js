@@ -1,29 +1,20 @@
-import type { Router } from 'express'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import express from 'express'
+import { Router } from 'express'
 
-const router: Router = express.Router()
-
-// 诗词类型
-interface Poem {
-  title: string
-  author: string
-  content: string
-  tags: string[]
-}
+const router = Router()
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// 读取 JSON 数据（可放入项目根目录或 data 目录）
+// 读取 JSON 数据
 const dataPath = path.resolve(__dirname, '../db/tang.json')
 const raw = fs.readFileSync(dataPath, 'utf-8')
-const poems = JSON.parse(raw) as Poem[]
+const poems = JSON.parse(raw)
 
 // 提取所有唯一标签
-const tagSet = new Set<string>()
+const tagSet = new Set()
 for (const poem of poems) {
   if (Array.isArray(poem.tags)) {
     poem.tags.forEach(tag => tagSet.add(tag))
@@ -32,7 +23,7 @@ for (const poem of poems) {
 const allTags = Array.from(tagSet).sort()
 
 // 提取所有唯一作者
-const authorSet = new Set<string>()
+const authorSet = new Set()
 for (const poem of poems) {
   if (poem.author) {
     authorSet.add(poem.author)
