@@ -8,7 +8,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (req: Request, res: Response<string>) => {
-  return res.send('Hello World12211!')
+  res.send('Hello World12211!')
 })
 
 // app.use('/test', test)
